@@ -205,12 +205,12 @@ export default function UppostPanel() {
   }
 
   return (
-    <div className="min-h-screen bg-background text-foreground flex flex-col">
+    <div className="min-h-screen bg-background text-foreground flex flex-col animate-fadeIn">
       <Header />
       <main className="flex-1 w-full">
         <div className="max-w-4xl mx-auto px-4 py-12">
-          <div className="flex justify-between items-start mb-10">
-            <div>
+          <div className="flex flex-col md:flex-row justify-between items-start gap-6 mb-10">
+            <div className="animate-fadeIn" style={{ animationDelay: "0.1s" }}>
               <h1 className="text-5xl md:text-6xl font-black mb-2">
                 📤 Uppost Panel
               </h1>
@@ -221,7 +221,7 @@ export default function UppostPanel() {
             </div>
             <button
               onClick={handleLogout}
-              className="flex items-center gap-2 px-4 py-2 bg-destructive text-destructive-foreground font-medium rounded-lg hover:bg-destructive/90 transition-all"
+              className="flex items-center gap-2 px-4 py-2 bg-destructive text-destructive-foreground font-medium rounded-lg hover:bg-destructive/90 transition-all shadow-md hover:shadow-lg active:scale-95"
             >
               <LogOut className="w-5 h-5" />
               Logout
@@ -230,7 +230,8 @@ export default function UppostPanel() {
 
           <form
             onSubmit={handleUpload}
-            className="bg-card border border-border rounded-xl p-10 space-y-8"
+            className="bg-card border border-border rounded-xl p-8 md:p-10 space-y-8 shadow-lg animate-fadeIn"
+            style={{ animationDelay: "0.2s" }}
           >
             {/* Title */}
             <div>
