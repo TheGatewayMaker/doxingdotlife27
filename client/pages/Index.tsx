@@ -154,31 +154,31 @@ export default function Index() {
 
       <main className="flex-1 w-full">
         {/* Hero Section */}
-        <div className="bg-gradient-to-b from-background via-card to-background py-12 md:py-20">
+        <div className="bg-gradient-to-br from-background via-card to-background pt-16 pb-12 md:pt-24 md:pb-20 border-b border-border/50">
           <div className="max-w-5xl mx-auto px-4">
-            <h1 className="text-5xl md:text-6xl font-black mb-2 text-foreground tracking-tight">
+            <h1 className="text-6xl md:text-7xl font-black mb-3 text-foreground tracking-tighter leading-none">
               Doxing Dot Life
             </h1>
-            <p className="text-lg md:text-xl text-muted-foreground mb-8">
+            <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-2xl">
               Find if you or someone you know have been Doxed
             </p>
 
             {/* Search Bar */}
-            <div className="relative mb-8">
+            <div className="relative mb-12">
               <input
                 type="text"
                 placeholder="Search for doxed individuals..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full px-6 py-4 bg-card border border-border rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent text-lg"
+                className="w-full px-6 py-4 bg-card border-2 border-border hover:border-accent/50 rounded-xl text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent text-lg transition-colors"
               />
-              <Search className="absolute right-4 top-1/2 transform -translate-y-1/2 w-6 h-6 text-muted-foreground" />
+              <Search className="absolute right-5 top-1/2 transform -translate-y-1/2 w-6 h-6 text-muted-foreground" />
             </div>
 
             {/* Categories Section */}
-            <div className="mb-8">
-              <h3 className="text-sm font-semibold text-muted-foreground mb-4 uppercase tracking-wider">
-                Look into Categories
+            <div className="mb-0">
+              <h3 className="text-xs font-bold text-muted-foreground mb-5 uppercase tracking-widest">
+                📂 Look into Categories
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {/* Country Dropdown */}
