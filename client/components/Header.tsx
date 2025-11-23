@@ -2,11 +2,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Menu, X, LogOut } from "lucide-react";
 import { HomeIcon } from "@/components/Icons";
-import { useAuth } from "@/hooks/use-auth";
+import { useAuthContext } from "@/contexts/AuthContext";
 
 export default function Header() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const { isAuthenticated, logout } = useAuth();
+  const { isAuthenticated, logout } = useAuthContext();
   const navigate = useNavigate();
 
   const closeSidebar = () => setIsSidebarOpen(false);
