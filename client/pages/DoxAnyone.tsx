@@ -35,7 +35,7 @@ export default function DoxAnyone() {
                 <p className="text-2xl sm:text-3xl font-black text-yellow-500">
                   299
                 </p>
-                <p className="text-xs sm:text-sm text-muted-foreground">PKR</p>
+                <p className="text-xs sm:text-sm text-yellow-500 font-semibold">PKR</p>
               </div>
               <div className="bg-slate-900 rounded-lg p-5 sm:p-6 border border-yellow-500">
                 <p className="text-xs sm:text-sm font-semibold text-yellow-500 mb-2">
@@ -44,7 +44,7 @@ export default function DoxAnyone() {
                 <p className="text-2xl sm:text-3xl font-black text-yellow-500">
                   1.10
                 </p>
-                <p className="text-xs sm:text-sm text-muted-foreground">USD</p>
+                <p className="text-xs sm:text-sm text-yellow-500 font-semibold">USD</p>
               </div>
               <div className="bg-slate-900 rounded-lg p-5 sm:p-6 border border-yellow-500">
                 <p className="text-xs sm:text-sm font-semibold text-yellow-500 mb-2">
@@ -53,7 +53,7 @@ export default function DoxAnyone() {
                 <p className="text-2xl sm:text-3xl font-black text-yellow-500">
                   99
                 </p>
-                <p className="text-xs sm:text-sm text-muted-foreground">INR</p>
+                <p className="text-xs sm:text-sm text-yellow-500 font-semibold">INR</p>
               </div>
             </div>
           </div>
