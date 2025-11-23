@@ -563,8 +563,8 @@ export default function Index() {
 
                 {/* Server Dropdown */}
                 <div className="relative group">
-                  <label className="text-sm font-bold text-yellow-500 block mb-3 flex items-center gap-2">
-                    <ServerIcon className="w-4 h-4 text-yellow-500" />
+                  <label className="text-sm font-bold text-foreground block mb-3 flex items-center gap-2">
+                    <ServerIcon className="w-4 h-4 text-accent" />
                     By Server
                   </label>
                   <input
@@ -574,7 +574,7 @@ export default function Index() {
                     }
                     value={serverSearch}
                     onChange={(e) => setServerSearch(e.target.value)}
-                    className="w-full px-4 py-3 bg-slate-900 border border-yellow-500 hover:border-yellow-400 rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 text-sm transition-all shadow-sm hover:shadow-md"
+                    className="w-full px-4 py-3 bg-card border border-border hover:border-accent/50 rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent text-sm transition-all shadow-sm hover:shadow-md"
                   />
                   {serverSearch && (
                     <div className="absolute top-full left-0 right-0 mt-2 bg-card border border-border rounded-lg z-50 max-h-48 overflow-y-auto shadow-lg">
