@@ -1,39 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { LogOut, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { UploadIcon, ImageIcon } from "@/components/Icons";
-
-interface AuthState {
-  isAuthenticated: boolean;
-  username: string;
-  token: string | null;
-}
+import { useAuthContext } from "@/contexts/AuthContext";
 
 export default function UppostPanel() {
   const navigate = useNavigate();
-  const [auth, setAuth] = useState<AuthState>({
-    isAuthenticated: false,
-    username: "",
-    token: null,
-  });
+  const { isAuthenticated, username, token, login } = useAuthContext();
   const [loginUsername, setLoginUsername] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [loginError, setLoginError] = useState("");
   const [isLoggingIn, setIsLoggingIn] = useState(false);
-
-  useEffect(() => {
-    const savedToken = localStorage.getItem("auth_token");
-    const savedUsername = localStorage.getItem("auth_username");
-    if (savedToken && savedUsername) {
-      setAuth({
-        isAuthenticated: true,
-        username: savedUsername,
-        token: savedToken,
-      });
-    }
-  }, []);
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
