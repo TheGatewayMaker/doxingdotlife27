@@ -45,6 +45,12 @@ export default function Header() {
           >
             🔍 Dox Anyone
           </Link>
+          <Link
+            to="/admin-panel"
+            className="flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-accent transition-colors"
+          >
+            ⚙️ Admin
+          </Link>
         </nav>
 
         {/* Mobile Menu Button */}
