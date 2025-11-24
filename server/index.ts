@@ -55,6 +55,22 @@ export function createServer() {
     next();
   });
 
+  // Health check endpoint
+  app.get("/api/health", (_req, res) => {
+    const hasAdminUsername = !!process.env.ADMIN_USERNAME;
+    const hasAdminPassword = !!process.env.ADMIN_PASSWORD;
+
+    res.json({
+      status: "ok",
+      environment: process.env.NODE_ENV || "development",
+      credentials: {
+        adminUsernameSet: hasAdminUsername,
+        adminPasswordSet: hasAdminPassword,
+      },
+      timestamp: new Date().toISOString(),
+    });
+  });
+
   // Example API routes
   app.get("/api/ping", (_req, res) => {
     const ping = process.env.PING_MESSAGE ?? "ping";
