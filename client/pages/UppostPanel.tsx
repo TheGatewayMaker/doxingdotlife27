@@ -5,12 +5,12 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { UploadIcon, ImageIcon } from "@/components/Icons";
 import { useAuthContext } from "@/contexts/AuthContext";
+import { toast } from "sonner";
 
 export default function UppostPanel() {
   const navigate = useNavigate();
-  const { isAuthenticated, username, token, login, logout } = useAuthContext();
-  const [loginUsername, setLoginUsername] = useState("");
-  const [loginPassword, setLoginPassword] = useState("");
+  const { isAuthenticated, email, user, loginWithGoogle, logout } =
+    useAuthContext();
   const [loginError, setLoginError] = useState("");
   const [isLoggingIn, setIsLoggingIn] = useState(false);
 
