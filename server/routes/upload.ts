@@ -24,31 +24,61 @@ export const handleUpload: RequestHandler = async (req, res) => {
       | undefined;
 
     if (!title || !description || !files?.media || !files?.thumbnail) {
+      console.error("Missing required fields", {
+        title: !!title,
+        description: !!description,
+        media: !!files?.media,
+        mediaCount: files?.media?.length,
+        thumbnail: !!files?.thumbnail,
+      });
       res.status(400).json({ error: "Missing required fields" });
       return;
     }
 
-    const mediaFile = files.media[0];
-    const thumbnailFile = files.thumbnail[0];
+    if (files.media.length === 0) {
+      res.status(400).json({ error: "At least one media file is required" });
+      return;
+    }
 
+    const thumbnailFile = files.thumbnail[0];
     const postId = Date.now().toString();
-    const mediaFileName = mediaFile.originalname || `${Date.now()}-media`;
     const thumbnailFileName = `thumbnail-${Date.now()}`;
 
     try {
-      const mediaUrl = await uploadMediaFile(
-        postId,
-        mediaFileName,
-        mediaFile.buffer,
-        mediaFile.mimetype || "application/octet-stream",
+      console.log(
+        `[${new Date().toISOString()}] Starting upload for post ${postId} with ${files.media.length} media file(s)`,
       );
 
+      // Upload thumbnail
       const thumbnailUrl = await uploadMediaFile(
         postId,
         thumbnailFileName,
         thumbnailFile.buffer,
         thumbnailFile.mimetype || "image/jpeg",
       );
+
+      // Upload all media files
+      const mediaFileNames: string[] = [];
+      for (let i = 0; i < files.media.length; i++) {
+        const mediaFile = files.media[i];
+        const sanitizedName = mediaFile.originalname || `media-${i + 1}`;
+        const mediaFileName = `${Date.now()}-${i}-${sanitizedName}`;
+
+        console.log(
+          `Uploading media file ${i + 1}/${files.media.length}: ${mediaFileName}`,
+        );
+
+        await uploadMediaFile(
+          postId,
+          mediaFileName,
+          mediaFile.buffer,
+          mediaFile.mimetype || "application/octet-stream",
+        );
+
+        mediaFileNames.push(mediaFileName);
+      }
+
+      console.log(`Successfully uploaded ${mediaFileNames.length} media files`);
 
       const postMetadata = {
         id: postId,
@@ -57,7 +87,7 @@ export const handleUpload: RequestHandler = async (req, res) => {
         country: country || "",
         city: city || "",
         server: server || "",
-        mediaFiles: [mediaFileName],
+        mediaFiles: mediaFileNames,
         createdAt: new Date().toISOString(),
       };
 
@@ -74,19 +104,41 @@ export const handleUpload: RequestHandler = async (req, res) => {
         }
       }
 
+      console.log(
+        `[${new Date().toISOString()}] ✅ Post ${postId} uploaded successfully`,
+      );
+
       res.json({
         success: true,
         message: "Post uploaded successfully",
         postId,
+        mediaCount: mediaFileNames.length,
       });
     } catch (r2Error) {
       console.error("R2 upload error:", r2Error);
       const errorMessage =
         r2Error instanceof Error ? r2Error.message : String(r2Error);
-      res.status(500).json({ error: `Upload to R2 failed: ${errorMessage}` });
+      console.error("Detailed R2 error:", {
+        error: errorMessage,
+        stack: r2Error instanceof Error ? r2Error.stack : undefined,
+        postId,
+      });
+      res.status(500).json({
+        error: `Upload to R2 failed: ${errorMessage}`,
+        details:
+          process.env.NODE_ENV === "development" ? errorMessage : undefined,
+      });
     }
   } catch (error) {
     console.error("Upload error:", error);
-    res.status(500).json({ error: "Upload failed" });
+    res.status(500).json({
+      error: "Upload failed",
+      details:
+        process.env.NODE_ENV === "development"
+          ? error instanceof Error
+            ? error.message
+            : String(error)
+          : undefined,
+    });
   }
 };

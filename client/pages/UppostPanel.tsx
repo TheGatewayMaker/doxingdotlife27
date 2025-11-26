@@ -123,6 +123,31 @@ export default function UppostPanel() {
       return;
     }
 
+    // Validate file sizes (500MB = 500 * 1024 * 1024 bytes)
+    const MAX_FILE_SIZE = 500 * 1024 * 1024;
+    const oversizedFiles: string[] = [];
+
+    if (thumbnail && thumbnail.size > MAX_FILE_SIZE) {
+      oversizedFiles.push(
+        `Thumbnail (${(thumbnail.size / 1024 / 1024).toFixed(2)}MB)`,
+      );
+    }
+
+    for (const file of mediaFiles) {
+      if (file.size > MAX_FILE_SIZE) {
+        oversizedFiles.push(
+          `${file.name} (${(file.size / 1024 / 1024).toFixed(2)}MB)`,
+        );
+      }
+    }
+
+    if (oversizedFiles.length > 0) {
+      setUploadError(
+        `The following files exceed 500MB: ${oversizedFiles.join(", ")}`,
+      );
+      return;
+    }
+
     const formData = new FormData();
     formData.append("title", title);
     formData.append("description", description);
@@ -152,11 +177,26 @@ export default function UppostPanel() {
       });
 
       if (!response.ok) {
-        throw new Error("Upload failed");
+        let errorMsg = "Upload failed";
+        try {
+          const errorData = await response.json();
+          if (errorData.error) {
+            errorMsg = errorData.error;
+          }
+          if (errorData.details) {
+            errorMsg += ` (${errorData.details})`;
+          }
+        } catch (parseError) {
+          console.error("Failed to parse error response", parseError);
+          errorMsg = `Upload failed with status ${response.status}`;
+        }
+        throw new Error(errorMsg);
       }
 
       const data = await response.json();
-      setUploadMessage("Post uploaded successfully!");
+      setUploadMessage(
+        `Post uploaded successfully! ${data.mediaCount ? `(${data.mediaCount} media file(s))` : ""}`,
+      );
       toast.success("Post uploaded successfully!");
       resetForm();
     } catch (error) {
@@ -353,7 +393,7 @@ export default function UppostPanel() {
                         Click to upload thumbnail
                       </p>
                       <p className="text-xs text-muted-foreground">
-                        Images only (Max 50MB)
+                        Images only (Max 500MB)
                       </p>
                     </div>
                   )}
@@ -467,7 +507,8 @@ export default function UppostPanel() {
                         Click to upload media files
                       </p>
                       <p className="text-xs text-muted-foreground">
-                        Images and videos supported (Max 100MB each)
+                        Images and videos supported (Max 500MB each, unlimited
+                        quantity)
                       </p>
                     </div>
                   )}
