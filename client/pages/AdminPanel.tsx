@@ -280,12 +280,12 @@ export default function AdminPanel() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background via-background to-background/80 text-foreground flex flex-col animate-fadeIn">
+    <div className="min-h-screen bg-background text-foreground flex flex-col animate-fadeIn">
       <Header />
 
       <main className="flex-1 w-full">
         {/* Hero Section */}
-        <div className="bg-gradient-to-br from-blue-600/10 via-background to-background py-4 md:py-6 border-b border-border/40">
+        <div className="bg-background py-4 md:py-6 border-b border-border/40">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="animate-fadeIn" style={{ animationDelay: "0.1s" }}>
               <div className="flex items-center gap-2 mb-3">
