@@ -236,7 +236,7 @@ export default function PostDetail() {
               className="mb-10 sm:mb-12 animate-fadeIn"
               style={{ animationDelay: "0.3s" }}
             >
-              <div className="bg-gradient-to-b from-slate-800/50 to-slate-800/20 border border-slate-700/50 rounded-xl p-6 sm:p-8">
+              <div className="bg-gray-800 border border-gray-700 rounded-xl p-6 sm:p-8">
                 <h2 className="text-lg sm:text-xl font-bold text-white mb-4 flex items-center gap-2">
                   <span>📋</span>
                   Overview
@@ -272,12 +272,12 @@ export default function PostDetail() {
 
             {/* Share Section */}
             <section
-              className="border-t border-blue-500/20 pt-8 sm:pt-10 animate-fadeIn"
+              className="border-t border-gray-700 pt-8 sm:pt-10 animate-fadeIn"
               style={{ animationDelay: "0.5s" }}
             >
               <button
                 onClick={handleShare}
-                className="flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all shadow-lg hover:shadow-xl hover:shadow-blue-500/30 active:scale-95 text-sm sm:text-base"
+                className="flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-gray-700 text-white font-bold rounded-lg hover:bg-gray-600 transition-all shadow-lg hover:shadow-xl hover:shadow-gray-900/50 active:scale-95 text-sm sm:text-base"
               >
                 <Share2 className="w-5 h-5" />
                 <span>Share This Post</span>
