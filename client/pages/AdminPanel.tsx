@@ -159,8 +159,8 @@ export default function AdminPanel() {
   useEffect(() => {
     let filtered = posts;
 
-    if (searchQuery) {
-      const query = searchQuery.toLowerCase();
+    if (debouncedSearchQuery) {
+      const query = debouncedSearchQuery.toLowerCase();
       filtered = filtered.filter(
         (post) =>
           post.title.toLowerCase().includes(query) ||
@@ -175,7 +175,7 @@ export default function AdminPanel() {
 
     setFilteredPosts(filtered);
     setCurrentPage(1);
-  }, [posts, searchQuery, selectedCountry]);
+  }, [posts, debouncedSearchQuery, selectedCountry]);
 
   useEffect(() => {
     const start = (currentPage - 1) * postsPerPage;
