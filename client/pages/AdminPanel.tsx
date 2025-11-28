@@ -311,7 +311,7 @@ export default function AdminPanel() {
                   placeholder="Search posts..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full px-3 sm:px-4 py-2.5 bg-card border-2 border-border hover:border-accent/40 rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent text-sm transition-all shadow-md hover:shadow-lg hover:shadow-blue-600/10 pl-9"
+                  className="w-full px-3 sm:px-4 py-2.5 bg-card border border-border hover:border-muted rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-muted/50 focus:border-muted text-sm transition-all pl-9"
                 />
                 <SearchIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
               </div>
@@ -319,13 +319,10 @@ export default function AdminPanel() {
 
             {/* Filter Section */}
             <div
-              className="bg-gradient-to-br from-card via-card/50 to-card/30 border border-border/60 rounded-lg p-4 mt-3 animate-fadeIn shadow-lg shadow-black/5"
+              className="bg-card border border-border rounded-lg p-4 mt-3 animate-fadeIn"
               style={{ animationDelay: "0.3s" }}
             >
               <div className="flex items-center gap-2 mb-4">
-                <div className="p-1.5 bg-blue-600/20 rounded-md">
-                  <FilterIcon className="w-4 h-4 text-blue-500" />
-                </div>
                 <div>
                   <h3 className="text-xs font-bold text-foreground uppercase tracking-wider">
                     Filter
