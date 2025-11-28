@@ -781,6 +781,60 @@ export default function UppostPanel() {
               </div>
             </div>
 
+            {/* Trend Checkbox */}
+            <div className="relative overflow-hidden">
+              <div className="relative flex items-center gap-3 bg-amber-900/15 border-2 border-amber-600/40 hover:border-amber-600/60 rounded-2xl p-6 transition-all duration-300 hover:shadow-lg hover:shadow-amber-600/10">
+                <input
+                  type="checkbox"
+                  id="trend-checkbox"
+                  checked={isTrend}
+                  onChange={(e) => setIsTrend(e.target.checked)}
+                  className="w-5 h-5 accent-amber-600 rounded cursor-pointer flex-shrink-0"
+                />
+                <label
+                  htmlFor="trend-checkbox"
+                  className="flex-1 cursor-pointer"
+                >
+                  <div className="flex items-center gap-2 mb-1">
+                    <svg
+                      className="w-4 h-4 text-amber-400 flex-shrink-0"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                    <p className="text-sm font-bold text-amber-400">
+                      Mark as Trending Post
+                    </p>
+                  </div>
+                  <p className="text-xs text-amber-300/80 ml-6">
+                    Posts marked as trending will appear first with a special
+                    golden gradient
+                  </p>
+                </label>
+              </div>
+
+              {isTrend && (
+                <div className="mt-4 animate-fadeIn">
+                  <label className="block text-sm font-bold mb-3 text-foreground">
+                    Trend Rank Number
+                  </label>
+                  <input
+                    type="number"
+                    value={trendRank}
+                    onChange={(e) => setTrendRank(e.target.value)}
+                    className="w-full px-4 py-3 bg-background/50 border-2 border-border/60 hover:border-accent/60 rounded-xl text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent transition-all duration-200"
+                    placeholder="Enter rank number (1 appears first, 2 second, etc.)"
+                    min="1"
+                  />
+                  <p className="text-xs text-muted-foreground mt-2">
+                    Lower numbers appear first. E.g., rank 1 appears before rank
+                    2
+                  </p>
+                </div>
+              )}
+            </div>
+
             {/* Media Upload */}
             <div>
               <label className="block text-sm font-bold mb-3 text-foreground">
