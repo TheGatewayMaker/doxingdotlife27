@@ -33,7 +33,7 @@ export default function Footer() {
                 <p className="text-xs text-gray-500">Doxing Database</p>
               </div>
             </div>
-            <p className="text-sm text-gray-500 leading-relaxed">
+            <p className="text-sm text-[#979797] leading-relaxed">
               The largest database of exposed and doxed individuals. Find and
               share information about anyone.
             </p>
