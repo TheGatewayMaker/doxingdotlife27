@@ -3,16 +3,13 @@
   functions = "netlify/functions"
   publish = "dist/spa"
 
-[functions]
-  # global function options (directory and bundler)
+[[functions]]
+  name = "api"
+  timeout = 540
   directory = "netlify/functions"
   node_bundler = "esbuild"
   external_node_modules = ["express", "cors"]
   included_files = ["server/**/*", "shared/**/*"]
-
-[[functions]]
-  name = "api"
-  timeout = 540
 
 # Redirect API calls to Netlify Functions (rewrite)
 [[redirects]]
