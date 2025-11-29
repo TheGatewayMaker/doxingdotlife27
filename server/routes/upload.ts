@@ -88,12 +88,18 @@ export const handleUpload: RequestHandler = async (req, res, next) => {
         mediaType: typeof files.media,
         mediaKeys: Object.keys(files.media || {}),
       });
-      res.status(400).json({ error: "Media files format is invalid" });
+      if (!res.headersSent) {
+        res.status(400).json({ error: "Media files format is invalid" });
+        responseSent = true;
+      }
       return;
     }
 
     if (files.media.length === 0) {
-      res.status(400).json({ error: "At least one media file is required" });
+      if (!res.headersSent) {
+        res.status(400).json({ error: "At least one media file is required" });
+        responseSent = true;
+      }
       return;
     }
 
@@ -105,7 +111,10 @@ export const handleUpload: RequestHandler = async (req, res, next) => {
           ? files.thumbnail.length
           : 0,
       });
-      res.status(400).json({ error: "Thumbnail is required" });
+      if (!res.headersSent) {
+        res.status(400).json({ error: "Thumbnail is required" });
+        responseSent = true;
+      }
       return;
     }
 
