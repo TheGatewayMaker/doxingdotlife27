@@ -108,3 +108,25 @@ export const handleGetPosts: RequestHandler = async (req, res) => {
     res.status(200).json({ posts: [], total: 0 });
   }
 };
+
+export const handleDeletePost: RequestHandler = async (req, res) => {
+  try {
+    const { postId } = req.params;
+
+    if (!postId) {
+      res.status(400).json({ error: "Post ID is required" });
+      return;
+    }
+
+    await deletePostFolder(postId);
+
+    res.json({
+      success: true,
+      message: "Post deleted successfully",
+      postId,
+    });
+  } catch (error) {
+    console.error("Error deleting post:", error);
+    res.status(500).json({ error: "Failed to delete post" });
+  }
+};
